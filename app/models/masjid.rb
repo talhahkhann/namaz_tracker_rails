@@ -1,0 +1,2 @@
+class Masjid < ApplicationRecord
+end
