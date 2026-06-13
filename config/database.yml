@@ -19,3 +19,11 @@ production:
     <<: *production_primary
     url: <%= ENV["DATABASE_URL"] %>
     migrations_paths: db/cable_schema
+  queue:
+    <<: *production_primary
+    url: <%= ENV["DATABASE_URL"] %>
+    migrations_paths: db/queue_schema
+  cache:
+    <<: *production_primary
+    url: <%= ENV["DATABASE_URL"] %>
+    migrations_paths: db/cache_schema
