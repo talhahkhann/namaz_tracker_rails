@@ -1,4 +1,6 @@
 class AuthController < ApplicationController
+  skip_before_action :authorize_request, only: [:register, :login]
+
   # REGISTER
   def register
     user = User.new(user_params)
@@ -31,6 +33,10 @@ class AuthController < ApplicationController
     else
       render json: { error: "Invalid email or password" }, status: :unauthorized
     end
+  end
+
+  def me
+    render json: { user: @current_user }
   end
 
   private
