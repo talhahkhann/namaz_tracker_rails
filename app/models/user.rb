@@ -9,4 +9,8 @@ class User < ApplicationRecord
 
   has_many :memberships
   has_many :masjids, through: :memberships
+
+  has_many :managed_masjids,
+           class_name: "Masjid",
+           foreign_key: :imam_id
 end

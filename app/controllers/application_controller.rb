@@ -16,7 +16,10 @@ class ApplicationController < ActionController::API
 
     return render json: { error: "Invalid token" }, status: :unauthorized if decoded.nil?
 
-    @current_user = User.find(decoded["user_id"])
+    user_id = decoded[:user_id] || decoded["user_id"]
+
+    @current_user = User.find(user_id)
+
   rescue ActiveRecord::RecordNotFound
     render json: { error: "User not found" }, status: :unauthorized
   end

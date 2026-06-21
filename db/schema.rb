@@ -10,16 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_06_13_094344) do
+ActiveRecord::Schema[8.1].define(version: 2026_06_21_095030) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
   create_table "masjids", force: :cascade do |t|
     t.string "address"
     t.datetime "created_at", null: false
+    t.integer "created_by"
     t.integer "imam_id"
     t.string "name"
     t.datetime "updated_at", null: false
+    t.integer "updated_by"
+    t.index ["imam_id"], name: "index_masjids_on_imam_id"
   end
 
   create_table "memberships", force: :cascade do |t|
@@ -53,6 +56,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_06_13_094344) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "masjids", "users", column: "imam_id"
   add_foreign_key "memberships", "masjids"
   add_foreign_key "memberships", "users"
   add_foreign_key "namaz_schedules", "masjids"

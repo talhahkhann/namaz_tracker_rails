@@ -9,5 +9,7 @@ Rails.application.routes.draw do
   get "/me", to:"auth#me"
 
   # Defines the root path route ("/")
+  resources :masjids, only: [:create, :index, :show]
+
   # root "posts#index"
 end
