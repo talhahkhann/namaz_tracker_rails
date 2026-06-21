@@ -1,15 +1,16 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
-  post "/register", to:"auth#register"
-  post "/login",to:"auth#login"
-  get "/me", to:"auth#me"
 
-  # Defines the root path route ("/")
-  resources :masjids, only: [:create, :index, :show]
+  # Auth
+  post "/register", to: "auth#register"
+  post "/login", to: "auth#login"
+  get "/me", to: "auth#me"
 
-  # root "posts#index"
+  # Masjid Routes
+  post "/createmasjid", to: "masjids#create"
+  get "/getallmasjids", to: "masjids#index"
+  get "/getmasjidbyid/:id", to: "masjids#show"
+  put "/updatemasjid/:id", to: "masjids#update"
+  patch "/updatemasjid/:id", to: "masjids#update"
+  delete "/deletemasjid/:id", to: "masjids#destroy"
 end
