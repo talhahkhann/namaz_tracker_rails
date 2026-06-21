@@ -20,6 +20,20 @@ class MasjidsController < ApplicationController
     end
   end
 
+  # GET /masjids/:id
+  def show
+    masjid = Masjid.find(params[:id])
+
+    render json: {
+      masjid: masjid
+    }, status: :ok
+
+  rescue ActiveRecord::RecordNotFound
+    render json: {
+      error: "Masjid not found"
+    }, status: :not_found
+  end
+
   private
 
   def masjid_params
